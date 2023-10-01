@@ -1,0 +1,17 @@
+docker exec -it aa2e49302b06 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "Pass@word" -Q "USE adventureworks; CREATE VIEW SalesLT.vProductsRoadBikes AS SELECT ProductID, Name, ListPrice FROM SalesLT.Product  WHERE ProductCategoryID = 6;" > fabricio2.txt
+
+
+CHALLENGE 1
+docker exec -it aa2e49302b06 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "Pass@word" -d adventureworks -Q "CREATE VIEW SalesLT.vAddressCA AS SELECT AddressLine1, City, StateProvince, CountryRegion FROM SalesLT.Address WHERE CountryRegion = 'Canada';"
+
+docker exec -it aa2e49302b06 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "Pass@word" -Q "USE adventureworks; SELECT * FROM SalesLT.vAddressCA; " > challenge1.txt
+
+CHALLENGE 2
+
+docker exec -it aa2e49302b06 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "Pass@word" -Q "USE adventureworks; SELECT ProductID, Name, Weight, ListPrice, CASE WHEN Weight > 1000 THEN N'Heavy' ELSE N'Normal' END AS WeightType FROM SalesLT.Product; " > challenge2.txt
+
+docker exec -it aa2e49302b06 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "Pass@word" -Q "USE adventureworks; SELECT DerivedTable.ProductID, DerivedTable.Name, DerivedTable.Weight, DerivedTable.ListPrice FROM ( SELECT ProductID, Name, Weight, ListPrice, CASE WHEN Weight > 1000. THEN N'Heavy' ELSE N'Normal' END AS WeightType FROM SalesLT.Product ) AS DerivedTable WHERE DerivedTable.WeightType = N'Heavy' AND DerivedTable.ListPrice > 2000; " > challenge3.txt
+
+
+
+aa2e49302b06
